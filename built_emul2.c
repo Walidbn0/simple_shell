@@ -7,7 +7,7 @@
  *        constant function prototype.
  *  Return: Always 0
  */
-int _myhist(info_t *info)
+int _myhist(info_t *info);
 {
 	print_list(info->history);
 	return (0);
@@ -20,7 +20,7 @@ int _myhist(info_t *info)
  *
  * Return: Always 0 on success, 1 on error
  */
-int unst_alias(info_t *info, char *str)
+int unst_alias(info_t *info, char *str);
 {
 	char *ptr, char;
 	int ret;
@@ -43,7 +43,7 @@ int unst_alias(info_t *info, char *str)
  *
  * Return: Always 0 on success, 1 on error
  */
-int st_alias(info_t *info, char *str)
+int st_alias(info_t *info, char *str);
 {
 	char *pt;
 
@@ -63,7 +63,7 @@ int st_alias(info_t *info, char *str)
  *
  * Return: Always 0 on success, 1 on error
  */
-int prnt_alias(list_t *node)
+int prnt_alias(list_t *node);
 {
 	char *pt = NULL, *a = NULL;
 
@@ -86,7 +86,7 @@ int prnt_alias(list_t *node)
  *          constant function prototype.
  *  Return: Always 0
  */
-int _myalias(info_t *info)
+int _myalias(info_t *info);
 {
 	int index = 0;
 	char *pter = NULL;
