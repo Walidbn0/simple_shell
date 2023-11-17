@@ -14,13 +14,13 @@ char *get_history_file(info_t *info)
 	dirt = _getenv(info, "HOME=");
 	if (!dirt)
 		return (NULL);
-	buffer = malloc(sizeof(char) * (_strlen(dirt) + _strlen(HIST_FILE) + 2));
+	buffer = malloc(sizeof(char) * (strlen(dirt) + _strlen(HIST_FILE) + 2));
 	if (!buffer)
 		return (NULL);
 	buffer[0] = 0;
-	_strcpy(buffer, dirt);
-	_strcat(buffer, "/");
-	_strcat(buffer, HIST_FILE);
+	strcpy(buffer, dirt);
+	strcat(buffer, "/");
+	strcat(buffer, HIST_FILE);
 	return (buffer);
 }
 
@@ -43,12 +43,12 @@ int write_history(info_t *info)
 	free(filename);
 	if (fdes == -1)
 		return (-1);
-	for (node = info->history; node; node = node->next)
+	for (node = info->hist; node; node = node->next)
 	{
 		_putsfd(node->str, fdes);
 		_putfd('\n', fdes);
 	}
-	_putfd(BUF_FLUSH, fdest);
+	_putfd(BUF_FLUSH, fdes);
 	close(fdes);
 	return (1);
 }
@@ -114,12 +114,12 @@ int build_history_list(info_t *info, char *buff, int linecoun)
 {
 	list_t *node = NULL;
 
-	if (info->history)
-		node = info->history;
+	if (info->hist)
+		node = info->hist;
 	add_node_end(&node, buff, linecoun);
 
-	if (!info->history)
-		info->history = node;
+	if (!info->hist)
+		info->hist = node;
 	return (0);
 }
 
@@ -131,7 +131,7 @@ int build_history_list(info_t *info, char *buff, int linecoun)
  */
 int renumber_history(info_t *info)
 {
-	list_t *node = info->history;
+	list_t *node = info->hist;
 	int index;
     index = 0;
 

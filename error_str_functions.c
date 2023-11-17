@@ -14,7 +14,7 @@ void _eputs(char *str)
 		return;
 	while (str[index] != '\0')
 	{
-		_eputchar(str[i]);
+		_eputchar(str[index]);
 		index++;
 	}
 }
@@ -31,13 +31,13 @@ int _eputchar(char c)
 	static int index;
 	static char buff[WRITE_BUF_SIZE];
 
-	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
+	if (c == BUF_FLUSH || index >= WRITE_BUF_SIZE)
 	{
 		write(2, buff, index);
 		index = 0;
 	}
 	if (c != BUF_FLUSH)
-		buf[index++] = c;
+		buff[index++] = c;
 	return (1);
 }
 

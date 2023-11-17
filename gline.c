@@ -35,7 +35,7 @@ ssize_t input_buff(info_t *info, char **buff, size_t *lengh)
 			build_history_list(info, *buff, info->histcount++);
 			{
 				*lengh = r;
-				info->commd_buff = buff;
+				info->commd_buf = buff;
 			}
 		}
 	}
@@ -56,7 +56,7 @@ ssize_t get_input(info_t *info)
 	char **buff_p = &(info->arg), *p;
 
 	_putchar(BUF_FLUSH);
-	r = input_buff(info, &buff, &lengh);
+	r = input_buff(info, &buff, &len);
 	if (r == -1)
 		return (-1);
 	if (lengh)
@@ -64,10 +64,10 @@ ssize_t get_input(info_t *info)
 		j = i; 
 		p = buff + i;
 
-		check_chain(info, buff, &j, i, lengh);
+		check_chaiin(info, buff, &j, i, lengh);
 		while (j < lengh)
 		{
-			if (is_chain(info, buff, &j))
+			if (is_chaiin(info, buff, &j))
 				break;
 			j++;
 		}
@@ -76,11 +76,11 @@ ssize_t get_input(info_t *info)
 		if (i >= len) 
 		{
 			i = len = 0;
-			info->commd_buf_type = COMD_NORM;
+			info->commd_buf_type = CMD_NORM;
 		}
 
 		*buff_p = p;
-		return (_strlen(p));
+		return (strlen(p));
 	}
 
 	*buff_p = buff;
@@ -121,7 +121,7 @@ int _getline(info_t *info, char **ptr, size_t *length)
 	static size_t i, leng;
 	size_t k;
 	ssize_t r = 0, s = 0;
-	char *p = NULL, *new_p = NULL, *char;
+	char *p = NULL, *new_p = NULL, *c;
 
 	p = *ptr;
 	if (p && length)
@@ -133,16 +133,16 @@ int _getline(info_t *info, char **ptr, size_t *length)
 	if (r == -1 || (r == 0 && leng == 0))
 		return (-1);
 
-	char = _strchr(buf + i, '\n');
-	k = char ? 1 + (unsigned int)(char - buf) : leng;
+	c = _strchr(buf + i, '\n');
+	k = c ? 1 + (unsigned int)(c - buf) : leng;
 	new_p = _realloc(p, s, s ? s + k : k + 1);
 	if (!new_p) 
 		return (p ? free(p), -1 : -1);
 
 	if (s)
-		_strncat(new_p, buf + i, k - i);
+		strncat(new_p, buf + i, k - i);
 	else
-		_strncpy(new_p, buf + i, k - i + 1);
+		strncpy(new_p, buf + i, k - i + 1);
 
 	s += k - i;
 	i = k;

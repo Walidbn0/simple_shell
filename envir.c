@@ -26,7 +26,7 @@ char *_getenvir(info_t *info, const char *name)
 
 	while (node)
 	{
-		p = starts_with(node->str, name);
+		ptr = starts_with(node->str, name);
 		if (ptr && *ptr)
 			return (ptr);
 		node = node->next;
@@ -69,7 +69,7 @@ int _myunsetenvir(info_t *info)
 		return (1);
 	}
 	for (index = 1; index <= info->argc; index++)
-		_unsetenv(info, info->argv[i]);
+		_unsetenv(info, info->argv[index]
 
 	return (0);
 }

@@ -16,18 +16,18 @@ int is_chaiin(info_t *info, char *buff, size_t *ptr)
 	{
 		buff[j] = 0;
 		j++;
-		info->commd_buf_type = COMD_OR;
+		info->commd_buf_type = CMD_OR;
 	}
 	else if (buff[j] == '&' && buff[j + 1] == '&')
 	{
 		buff[j] = 0;
 		j++;
-		info->comd_buf_type = COMD_AND;
+		info->commd_buf_type = CMD_AND;
 	}
 	else if (buff[j] == ';') 
 	{
 		buff[j] = 0;
-		info->commd_buf_type = COMD_CHAIN;
+		info->commd_buf_type = CMD_CHAIN;
 	}
 	else
 		return (0);
@@ -49,7 +49,7 @@ void check_chaiin(info_t *info, char *buf, size_t *pt, size_t i, size_t lengh)
 {
 	size_t j = *pt;
 
-	if (info->commd_buf_type == COMD_AND)
+	if (info->commd_buf_type == CMD_AND)
 	{
 		if (info->status)
 		{
@@ -57,7 +57,7 @@ void check_chaiin(info_t *info, char *buf, size_t *pt, size_t i, size_t lengh)
 			j = lengh;
 		}
 	}
-	if (info->comd_buf_type == COMD_OR)
+	if (info->commd_buf_type == CMD_OR)
 	{
 		if (!info->status)
 		{
@@ -114,7 +114,7 @@ int rep_vars(info_t *info)
 		if (info->argv[i][0] != '$' || !info->argv[i][1])
 			continue;
 
-		if (!_strcmp(info->argv[i], "$?"))
+		if (!strcmp(info->argv[i], "$?"))
 		{
 			rep_string(&(info->argv[i]),
 				_strdup(convert_number(info->status, 10, 0)));
@@ -146,7 +146,7 @@ int rep_vars(info_t *info)
  *
  * Return: 1 if replaced, 0 otherwise
  */
-int rep_string(char **oldstr, char *newstr)
+int rep_string(char **old_str, char *new_str)
 {
 	free(*old_str);
 	*old_str = new_str;
