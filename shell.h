@@ -112,80 +112,85 @@ typedef struct builtin
 
 
 /* shlo.c */
-int shlo(info_t *, char **);
-int find_builtin(info_t *);
-void find_commd(info_t *);
-void fork_commd(info_t *);
+int shlo(info_t *info, char **argv);
+int find_builtin(info_t *info);
+void find_commd(info_t *info);
+void fork_commd(info_t *info);
 
 /* path.c */
-int is_commd(info_t *, char *);
-char *dup_chars(char *, int, int);
-char *find_path(info_t *, char *, char *);
+int is_commd(info_t *info, char *path);
+char *dup_chars(char *strpath, int start, int stop);
+char *find_path(info_t *inf, char *strpath, char *commd);
 
 /* loophsh.c */
 int loophsh(char **);
 
 /* error_str_functions.c */
-void _eputs(char *);
-int _eputchar(char);
-int _putfd(char c, int fd);
-int _putsfd(char *str, int fd);
+void _eputs(char *str);
+int _eputchar(char c);
+int _putfd(char c, int fdesc);
+int _putsfd(char *str, int fdesc);
 
 /* str_functions.c */
 int	ft_strlen(char *str)
 int	ft_strcmp(char *s1, char *s2)
-char *starts_with(const char *, const char *);
+char *starts_with(const char *haystack, const char *needle);
 char *ft_strcat(char *dest, char *src)
 
 /* str_functions2.c */
 char *ft_strcpy(char *dest, char *src)
-char *_strdup(const char *);
-void _puts(char *);
-int _putchar(char);
+char *_strdup(const char *str);
+void _puts(char *str);
+int _putchar(char c);
 
 /* str_functions3.c */
 char *ft_strncpy(char *dest, char *src, unsigned int n)
 char *ft_strncat(char *dest, char *src, unsigned int nb)
-char *_strchr(char *, char);
+char *_strchr(char *s, char c);
 
 /* str_functions4.c */
-char **strtow(char *, char *);
-char **strtow2(char *, char);
+char **strtow(char *str, char *deli);
+char **strtow2(char *str, char deli);
 
 /* mem_functions */
-char *_memset(char *, char, unsigned int);
-void ffree(char **);
-void *_realloc(void *, unsigned int, unsigned int);
+char *_memset(char *s, char bit, unsigned int n);
+void ffree(char **pep);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 
 /* mem_functions2.c */
-int bfree(void **);
+int bfree(void **ptr);
 
 /* more_functions.c */
-int interactive(info_t *);
-int is_delim(char, char *);
-int _isalpha(int);
-int _atoi(char *);
+int interactive(info_t *info);
+int is_delim(char c, char *delim);
+int _isalpha(int c);
+int _atoi(char *str);
 
 /* more_functions2.c */
-int _erratoi(char *);
-void print_error(info_t *, char *);
-int print_d(int, int);
-char *convert_number(long int, int, int);
-void remove_comments(char *);
+int _erratoi(char *s);
+void print_error(info_t *info, char *erstr);
+int print_de(int input, int fdes);
+char *convert_number(long int num, int base, int flags);
+void remove_comments(char *buff);
 
-/* builtin_emulators.c */
+/* built_emul.c */
 int _myext(info_t *info);
 int _mychdir(info_t *info);
 int _myhelp(info_t *info);
 
-/* builtin_emulators2.c */
-int _myhist(info_t *);
-int _myalias(info_t *);
+/* built_emul2.c */
+int _myhist(info_t *info);
+int unst_alias(info_t *info, char *str);
+int st_alias(info_t *info, char *str);
+int prnt_alias(list_t *node);
+int _myalias(info_t *info);
 
-/* getline.c module */
-ssize_t get_input(info_t *);
-int _getline(info_t *, char **, size_t *);
-void sigintHandler(int);
+/* gline.c */
+ssize_t input_buff(info_t *info, char **buff, size_t *lengh);
+ssize_t get_input(info_t *info);
+ssize_t read_buf(info_t *info, char *buf, size_t *i);
+int _getline(info_t *info, char **ptr, size_t *length);
+void sigintHandler(__attribute__((unused))int sig_num);
 
 /* info.c module */
 void clear_info(info_t *);
