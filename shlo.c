@@ -52,30 +52,39 @@ int shlo(info_t *info, char **argv)
  *			1 if builtin found but not successful,
  *			-2 if builtin signals exit()
  */
+#include <string.h>
+
+typedef struct {
+    char *type;
+    int (*func)(info_t *info);
+} builtin_table;
+
 int find_builtin(info_t *info)
 {
-	int index, built_in_ret = -1;
-	builtin_table builtintbl[] = 
-	{
-		{"exit", _myext},
-		{"env", _myenv},
-		{"help", _myhelp},
-		{"history", _myhist},
-		{"setenv", _mysetenvir},
-		{"unsetenv", _myunsetenvir},
-		{"cd", _mychdir},
-		{"alias", _myalias},
-		{NULL, NULL}
-	}
+    int index, built_in_ret = -1;
+    builtin_table builtintbl[] =
+    {
+        {"exit", _myext},
+        {"env", _myenvir},
+        {"help", _myhelp},
+        {"history", _myhist},
+        {"setenv", _mysetenvir},
+        {"unsetenv", _myunsetenvir},
+        {"cd", _mychdir},
+        {"alias", _myalias},
+        {NULL, NULL}
+    };
 
-	for (index = 0; builtintbl[index].type != NULL; index++)
-		if (strcmp(info->argv[0], builtintbl[index].type) == 0)
-		{
-			info->line_count++;
-			built_in_ret = builtintbl[index].func(info);
-			break;
-		}
-	return (built_in_ret);
+    for (index = 0; builtintbl[index].type != NULL; index++)
+    {
+        if (strcmp(info->argv[0], builtintbl[index].type) == 0)
+        {
+            info->line_count++;
+            built_in_ret = builtintbl[index].func(info);
+            break;
+        }
+    }
+    return (built_in_ret);
 }
 
 /**

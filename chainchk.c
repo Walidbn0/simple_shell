@@ -120,7 +120,7 @@ int rep_vars(info_t *info)
 				_strdup(convert_number(info->status, 10, 0)));
 			continue;
 		}
-		if (!_strcmp(info->argv[i], "$$"))
+		if (!strcmp(info->argv[i], "$$"))
 		{
 			rep_string(&(info->argv[i]),
 				_strdup(convert_number(getpid(), 10, 0)));

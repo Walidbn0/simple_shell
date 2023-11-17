@@ -59,7 +59,7 @@ ssize_t get_input(info_t *info)
 	r = input_buff(info, &buff, &len);
 	if (r == -1)
 		return (-1);
-	if (lengh)
+	if (len)
 	{
 		j = i; 
 		p = buff + i;

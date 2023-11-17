@@ -14,7 +14,7 @@ char *get_history_file(info_t *info)
 	dirt = _getenv(info, "HOME=");
 	if (!dirt)
 		return (NULL);
-	buffer = malloc(sizeof(char) * (strlen(dirt) + _strlen(HIST_FILE) + 2));
+	buffer = malloc(sizeof(char) * (strlen(dirt) + strlen(HIST_FILE) + 2));
 	if (!buffer)
 		return (NULL);
 	buffer[0] = 0;
@@ -97,7 +97,7 @@ int read_history(info_t *info)
 	free(buff);
 	info->histcount = linecount;
 	while (info->histcount-- >= HIST_MAX)
-		delete_node_at_index(&(info->history), 0);
+		delete_node_at_index(&(info->hist), 0);
 	renumber_history(info);
 	return (info->histcount);
 }

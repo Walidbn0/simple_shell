@@ -30,7 +30,7 @@ char **strtow(char *str, char *deli)
 		while (is_delim(str[index], deli))
 			index++;
 		k = 0;
-		while (!is_delim(str[i + k], deli) && str[index + k])
+		while (!is_delim(str[index + k], deli) && str[index + k])
 			k++;
 		s[j] = malloc((k + 1) * sizeof(char));
 		if (!s[j])

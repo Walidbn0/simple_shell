@@ -69,7 +69,7 @@ int _myunsetenvir(info_t *info)
 		return (1);
 	}
 	for (index = 1; index <= info->argc; index++)
-		_unsetenv(info, info->argv[index]
+		_unsetenv(info, info->argv[index]);
 
 	return (0);
 }

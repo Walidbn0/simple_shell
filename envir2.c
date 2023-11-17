@@ -67,7 +67,7 @@ int _setenv(info_t *info, char *var, char *val)
 	if (!var || !val)
 		return (0);
 
-	buff = malloc(_strlen(var) + strlen(val) + 2);
+	buff = malloc(strlen(var) + strlen(val) + 2);
 	if (!buff)
 		return (1);
 	strcpy(buff, var);

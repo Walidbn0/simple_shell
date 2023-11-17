@@ -94,7 +94,8 @@ list_t *node_starts_with(list_t *node, char *strfix, char c)
 	while (node)
 	{
 		p = starts_with(node->str, strfix);
-		if (p && (c == -1) || (*p == c))
+		if (p && ((c == -1) || (*p == c)))
+
 			return (node);
 		node = node->next;
 	}
