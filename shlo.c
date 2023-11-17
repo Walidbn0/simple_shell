@@ -57,12 +57,12 @@ int shlo(info_t *info, char **argv)
 typedef struct {
     char *type;
     int (*func)(info_t *info);
-} builtin_table;
+} Builtin_table;
 
 int find_builtin(info_t *info)
 {
     int index, built_in_ret = -1;
-    builtin_table builtintbl[] =
+    Builtin_table builtintbl[] =
     {
         {"exit", _myext},
         {"env", _myenvir},

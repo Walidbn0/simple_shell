@@ -64,8 +64,8 @@ ssize_t get_input(info_t *info)
 		j = i; 
 		p = buff + i;
 
-		check_chaiin(info, buff, &j, i, lengh);
-		while (j < lengh)
+		check_chaiin(info, buff, &j, i, len);
+		while (j < len)
 		{
 			if (is_chaiin(info, buff, &j))
 				break;
