@@ -192,28 +192,28 @@ ssize_t read_buf(info_t *info, char *buf, size_t *i);
 int _getline(info_t *info, char **ptr, size_t *length);
 void sigintHandler(__attribute__((unused))int sig_num);
 
-/* info.c module */
-void clear_info(info_t *);
-void set_info(info_t *, char **);
-void free_info(info_t *, int);
+/* info.c */
+void clear_info(info_t *info);
+void set_info(info_t *info, char **argv);
+void free_info(info_t *info, int all);
 
-/* envir.c module */
-char *_getenv(info_t *, const char *);
-int _myenvir(info_t *);
-int _mysetenvir(info_t *);
-int _myunsetenvir(info_t *);
-int populate_envir_list(info_t *);
+/* envir.c */
+char *_getenv(info_t *info, const char *name);
+int _myenvir(info_t *info);
+int _mysetenvir(info_t *info);
+int _myunsetenvir(info_t *info);
+int populate_envir_list(info_t *info);
 
-/* envir2.c module */
-char **get_environ(info_t *);
-int _unsetenv(info_t *, char *);
-int _setenv(info_t *, char *, char *);
+/* envir2.c */
+char **get_environ(info_t *info);
+int _unsetenv(info_t *info, char *var);
+int _setenv(info_t *info, char *var, char *val);
 
-/* file_io_functions.c */
+/* file_io_funct.c */
 char *get_history_file(info_t *info);
 int write_history(info_t *info);
 int read_history(info_t *info);
-int build_history_list(info_t *info, char *buf, int linecount);
+int build_history_list(info_t *info, char *buff, int linecount);
 int renumber_history(info_t *info);
 
 /* liststr.c module */
