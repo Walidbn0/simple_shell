@@ -43,7 +43,7 @@ void print_error(info_t *info, char *erstr)
 	_eputs(": ");
 	_eputs(info->argv[0]);
 	_eputs(": ");
-	_eputs(estr);
+	_eputs(erstr);
 }
 
 /**
@@ -59,7 +59,7 @@ int print_de(int input, int fdes)
 	int i, count = 0;
 	unsigned int _abs_, current;
 
-	if (fd == STDERR_FILENO)
+	if (fdes == STDERR_FILENO)
 		__putchar = _eputchar;
 	if (input < 0)
 	{

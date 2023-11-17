@@ -19,8 +19,8 @@ int main(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		fd = open(argv[1], O_RDONLY);
-		if (fd == -1)
+		fdes = open(argv[1], O_RDONLY);
+		if (fdes == -1)
 		{
 			if (errno == EACCES)
 				exit(126);
@@ -37,8 +37,8 @@ int main(int argc, char **argv)
 		}
 		info->readfd = fdes;
 	}
-	populate_env_list(info);
+	populate_envir_list(info);
 	read_history(info);
-	hsh(info, av);
+	shlo(info, argv);
 	return (EXIT_SUCCESS);
 }

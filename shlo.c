@@ -21,7 +21,7 @@ int shlo(info_t *info, char **argv)
 		r = get_input(info);
 		if (r != -1)
 		{
-			set_info(info, av);
+			set_info(info, argv);
 			builtin_ret = find_builtin(info);
 			if (builtin_ret == -1)
 				find_commd(info);
@@ -57,19 +57,19 @@ int find_builtin(info_t *info)
 	int index, built_in_ret = -1;
 	builtin_table builtintbl[] = 
 	{
-		{"exit", _myexit},
+		{"exit", _myext},
 		{"env", _myenv},
 		{"help", _myhelp},
-		{"history", _myhistory},
-		{"setenv", _mysetenv},
-		{"unsetenv", _myunsetenv},
-		{"cd", _mycd},
+		{"history", _myhist},
+		{"setenv", _mysetenvir},
+		{"unsetenv", _myunsetenvir},
+		{"cd", _mychdir},
 		{"alias", _myalias},
 		{NULL, NULL}
 	}
 
-	for (index = 0; builtintbl[index].type; index++)
-		if (_strcmp(info->argv[0], builtintbl[index].type) == 0)
+	for (index = 0; builtintbl[index].type != NULL; index++)
+		if (strcmp(info->argv[0], builtintbl[index].type) == 0)
 		{
 			info->line_count++;
 			built_in_ret = builtintbl[index].func(info);
@@ -87,7 +87,7 @@ int find_builtin(info_t *info)
 void find_commd(info_t *info)
 {
 	char *path = NULL;
-	int iindex, k;
+	int index, k;
 
 	info->path = info->argv[0];
 	if (info->linecount_flag == 1)
@@ -95,8 +95,9 @@ void find_commd(info_t *info)
 		info->line_count++;
 		info->linecount_flag = 0;
 	}
-	for (index = 0, k = 0; info->arg[index]; index++)
-		if (!is_delim(info->arg[index], " \t\n"))
+	index = 0;
+	for (k = 0; info->arg[index] != '\0'; index++)
+		if (!is_delim(info->arg[(int)index], " \t\n"))
 			k++;
 	if (!k)
 		return;
@@ -133,7 +134,7 @@ void fork_commd(info_t *info)
 	child_pid = fork();
 	if (child_pid == -1)
 	{
-		prerror("Error:");
+		perror("Error:");
 		return;
 	}
 	if (child_pid == 0)
@@ -149,7 +150,7 @@ void fork_commd(info_t *info)
 	else
 	{
 		wait(&(info->status));
-		if (WFEXITED(info->status))
+		if (WIFEXITED(info->status))
 		{
 			info->status = WEXITSTATUS(info->status);
 			if (info->status == 126)
