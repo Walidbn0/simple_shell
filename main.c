@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 		}
 		info->readfd = fdes;
 	}
-	populate_envir_list(info);
+	populate_envir_lists(info);
 	read_history(info);
 	shlo(info, argv);
 	return (EXIT_SUCCESS);

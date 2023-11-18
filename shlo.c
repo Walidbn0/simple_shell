@@ -111,7 +111,7 @@ void find_commd(info_t *info)
 	if (!k)
 		return;
 
-	path = find_path(info, _getenv(info, "PATH="), info->argv[0]);
+	path = find_path(info, _getenvir(info, "PATH="), info->argv[0]);
 	if (path)
 	{
 		info->path = path;
@@ -119,7 +119,7 @@ void find_commd(info_t *info)
 	}
 	else
 	{
-		if ((interactive(info) || _getenv(info, "PATH=")
+		if ((interactive(info) || _getenvir(info, "PATH=")
 			|| info->argv[0][0] == '/') && is_commd(info, info->argv[0]))
 			fork_commd(info);
 		else if (*(info->arg) != '\n')

@@ -45,38 +45,38 @@ int _mychdir(info_t *info)
                 _puts("TODO: >>getcwd failure emsg here<<\n");
         if (!info->argv[1])
         {
-                dirt = _getenv(info, "HOME=");
+                dirt = _getenvir(info, "HOME=");
                 if (!dirt)
                         chdir_ret =
-                                chdir((dirt = _getenv(info, "PWD=")) ? dirt : "/");
+                                chdir((dirt = _getenvir(info, "PWD=")) ? dirt : "/");
                 else
                         chdir_ret = chdir(dirt);
         }
         else if (ft_strcmp(info->argv[1], "-") == 0)
         {
-                if (!_getenv(info, "OLDPWD="))
+                if (!_getenvir(info, "OLDPWD="))
                 {
                         _puts(s);
                         _putchar('\n');
                         return (1);
                 }
-                _puts(_getenv(info, "OLDPWD=")), _putchar('\n');
+                _puts(_getenvir(info, "OLDPWD=")), _putchar('\n');
                 chdir_ret =
-                        chdir((dirt = _getenv(info, "OLDPWD=")) ? dirt : "/");
-        }
-        else
-                chdir_ret = chdir(info->argv[1]);
-        if (chdir_ret == -1)
-        {
-                print_error(info, "can't cd to ");
-                _eputs(info->argv[1]), _eputchar('\n');
-        }
-        else
-        {
-                _setenv(info, "OLDPWD", _getenv(info, "PWD="));
-                _setenv(info, "PWD", getcwd(buffer, 1024));
-        }
-        return (0);
+			 chdir((dirt = _getenvir(info, "OLDPWD=")) ? dirt : "/");
+	}
+	else
+		chdir_ret = chdir(info->argv[1]);
+	if (chdir_ret == -1)
+	{
+		print_error(info, "can't cd to ");
+		_eputs(info->argv[1]), _eputchar('\n');
+	}
+	else
+	{
+		_setenv(info, "OLDPWD", _getenvir(info, "PWD="));
+		_setenv(info, "PWD", getcwd(buffer, 1024));
+	}
+	return (0);
 }
 
 /**
@@ -87,11 +87,11 @@ int _mychdir(info_t *info)
  */
 int _myhelp(info_t *info)
 {
-        char **arg_array;
+	char **arg_array;
 
-        arg_array = info->argv;
-        _puts("help call works. Function not yet implemented \n");
-        if (0)
-                _puts(*arg_array);
-        return (0);
+	arg_array = info->argv;
+	_puts("help call works. Function not yet implemented \n");
+	if (0)
+		_puts(*arg_array);
+	return (0);
 }

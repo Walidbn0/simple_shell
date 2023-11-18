@@ -80,7 +80,7 @@ int _myunsetenvir(info_t *info)
  *          constant function prototype.
  * Return: Always 0
  */
-int poplate_envir_lists(info_t *info)
+int populate_envir_lists(info_t *info)
 {
 	list_t *node = NULL;
 	size_t i;

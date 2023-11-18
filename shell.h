@@ -122,9 +122,6 @@ int is_commd(info_t *, char *);
 char *dup_chars(char *, int, int);
 char *find_path(info_t *, char *, char *);
 
-/* loophsh.c */
-int loophsh(char **);
-
 /* error_str_functions.c */
 void _eputs(char *);
 int _eputchar(char);
@@ -158,18 +155,18 @@ void ffree(char **);
 void *_realloc(void *, unsigned int, unsigned int);
 
 /* mem_functions2.c */
-int bfree(void **);
+int bbfree(void **);
 
 /* more_functions.c */
 int interactive(info_t *);
 int is_delim(char, char *);
 int _isalpha(int);
-int _atoi(char *);
+int ft_atoi(char *);
 
 /* more_functions2.c */
-int _erratoi(char *);
-void print_error(info_t *, char *);
-int print_d(int, int);
+int _erratoi(char *s);
+void print_error(info_t *info, char *erstr);
+int print_de(int input, int fdes);
 char *convert_number(long int, int, int);
 void remove_comments(char *);
 
@@ -180,10 +177,15 @@ int _myhelp(info_t *info);
 
 /* builtin_emulators2.c */
 int _myhist(info_t *);
+int unst_alias(info_t *info, char *str);
+int st_alias(info_t *info, char *str);
+int prnt_alias(list_t *node);
 int _myalias(info_t *);
 
 /* getline.c module */
+ssize_t input_buff(info_t *, char **, size_t *);
 ssize_t get_input(info_t *);
+ssize_t read_buf(info_t *, char *, size_t *);
 int _getline(info_t *, char **, size_t *);
 void sigintHandler(int);
 
@@ -193,11 +195,11 @@ void set_info(info_t *, char **);
 void free_info(info_t *, int);
 
 /* envir.c module */
-char *_getenv(info_t *, const char *);
-int _myenvir(info_t *);
+int _myenvir(info_t *info);
+char *_getenvir(info_t *, const char *);
 int _mysetenvir(info_t *);
 int _myunsetenvir(info_t *);
-int populate_envir_list(info_t *);
+int populate_envir_lists(info_t *);
 
 /* envir2.c module */
 char **get_environ(info_t *);

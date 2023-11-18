@@ -11,7 +11,7 @@ char *get_history_file(info_t *info)
 {
 	char *buffer, *dirt;
 
-	dirt = _getenv(info, "HOME=");
+	dirt = _getenvir(info, "HOME=");
 	if (!dirt)
 		return (NULL);
 	buffer = malloc(sizeof(char) * (strlen(dirt) + strlen(HIST_FILE) + 2));
@@ -133,7 +133,8 @@ int renumber_history(info_t *info)
 {
 	list_t *node = info->hist;
 	int index;
-    index = 0;
+
+	index = 0;
 
 	while (node)
 	{
